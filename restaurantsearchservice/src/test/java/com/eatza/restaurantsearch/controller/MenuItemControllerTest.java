@@ -25,7 +25,6 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.eatza.restaurantsearch.dto.ItemRequestDto;
-import com.eatza.restaurantsearch.exception.ItemNotFoundException;
 import com.eatza.restaurantsearch.model.Menu;
 import com.eatza.restaurantsearch.model.MenuItem;
 import com.eatza.restaurantsearch.service.menuitemservice.MenuItemService;
