@@ -17,8 +17,8 @@ public class OrderingserviceApplication {
 	}
 	
 	@Bean
-	public FilterRegistrationBean jwtFilterBean() {
-		final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+	public FilterRegistrationBean<JwtFilter> jwtFilterBean() {
+		final FilterRegistrationBean<JwtFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new JwtFilter());
 		registrationBean.addUrlPatterns("/order/*");
 

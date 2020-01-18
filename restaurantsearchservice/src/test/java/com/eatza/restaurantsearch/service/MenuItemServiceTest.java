@@ -26,7 +26,6 @@ import com.eatza.restaurantsearch.dto.ItemRequestDto;
 import com.eatza.restaurantsearch.exception.ItemNotFoundException;
 import com.eatza.restaurantsearch.exception.MenuNotSavedException;
 import com.eatza.restaurantsearch.exception.RestaurantBadRequestException;
-import com.eatza.restaurantsearch.exception.RestaurantNotFoundException;
 import com.eatza.restaurantsearch.model.Menu;
 import com.eatza.restaurantsearch.model.MenuItem;
 import com.eatza.restaurantsearch.model.Restaurant;

@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "318b1226-0ef7-4370-be14-810a5954f5b1",
+		"name": "Capstone Spring Boot 301",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "RESTAURANT-SEARCH-SERVICE",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"user\",\n\t\"password\": \"password\"\n}"
+						},
+						"url": {
+							"raw": "localhost:7777/restaurant-service/login",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"restaurant-service",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restaurants",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOiJ1c2VyIiwiaWF0IjoxNTc5MzcyMTYxLCJleHAiOjE1NzkzNzMwNjF9.OcQaWu1Hi31bkrmlPHGdWvFjEV0qh6VaW161hcmPuxU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:7777/restaurant-service/restaurants",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"restaurant-service",
+								"restaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restaurant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOiJ1c2VyIiwiaWF0IjoxNTc5MzcyMTYxLCJleHAiOjE1NzkzNzMwNjF9.OcQaWu1Hi31bkrmlPHGdWvFjEV0qh6VaW161hcmPuxU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"McDonald\",\n\t\"location\": \"RR Nagar\",\n\t\"cuisine\": \"Burger\",\n\t\"budget\": 200,\n\t\"rating\": 5,\n\t\"activeFrom\": \"01-01-2000\",\n\t\"activeTill\": \"Now\"\n}"
+						},
+						"url": {
+							"raw": "localhost:7777/restaurant-service/restaurant",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"restaurant-service",
+								"restaurant"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

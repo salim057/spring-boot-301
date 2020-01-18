@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.eatza.order.dto.UserDto;
 import com.eatza.order.exception.UnauthorizedException;
-import com.eatza.order.service.itemservice.ItemServiceImpl;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
