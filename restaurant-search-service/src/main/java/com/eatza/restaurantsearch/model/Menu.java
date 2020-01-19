@@ -15,11 +15,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter @Setter @NoArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 public class Menu {
 
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String activeFrom;
 	private String activeTill;
@@ -29,16 +31,10 @@ public class Menu {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Restaurant restaurant;
 
-
-	public Menu(String activeFrom, String activeTill, Restaurant restaurant ) {
+	public Menu(String activeFrom, String activeTill, Restaurant restaurant) {
 		this.restaurant = restaurant;
 		this.activeFrom = activeFrom;
 		this.activeTill = activeTill;
 	}
-
-
-
-
-
 
 }

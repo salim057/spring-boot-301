@@ -4,9 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 public class RestaurantRequestDto {
-	
+
 	private String name;
 	private String location;
 	private String cuisine;
@@ -14,6 +16,5 @@ public class RestaurantRequestDto {
 	private double rating;
 	private String activeFrom;
 	private String activeTill;
-
 
 }

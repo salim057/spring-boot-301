@@ -16,7 +16,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class JwtAuthenticationService {
 
-
 	private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationService.class);
 
 	@Value("${user}")
@@ -27,26 +26,22 @@ public class JwtAuthenticationService {
 
 	private static final long EXPIRATIONTIME = 900000;
 
-
 	public String authenticateUser(UserDto user) throws UnauthorizedException {
-
-
-		if(!(user.getUsername().equals(username))) {
+		if (!(user.getUsername().equals(username))) {
 			logger.debug("Username is invalid");
-
 			throw new UnauthorizedException("Invalid Credentials");
 		}
-		if(!(user.getPassword().equals(password))){
-			
+		if (!(user.getPassword().equals(password))) {
 			logger.debug("Password is invalid");
 			throw new UnauthorizedException("Invalid Credentials");
-
 		}
-		return Jwts.builder().setSubject(username).claim("roles", "user").setIssuedAt(new Date())
-				.signWith(SignatureAlgorithm.HS256, "secretkey").setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME)).compact();
-
-
-
+		return Jwts
+				.builder()
+				.setSubject(username)
+				.claim("roles", "user")
+				.setIssuedAt(new Date())
+				.signWith(SignatureAlgorithm.HS256, "secretkey")
+				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME)).compact();
 	}
 
 }

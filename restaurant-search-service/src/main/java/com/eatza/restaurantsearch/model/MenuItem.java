@@ -17,29 +17,28 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "menu_items")
-@Getter @Setter @NoArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 public class MenuItem {
-	
+
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String description;
 	private int price;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "menu_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	Menu menu;
-	
-	
+
 	public MenuItem(String name, String description, int price, Menu menu) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
-		this.menu= menu;
+		this.menu = menu;
 	}
-
-
 
 }
