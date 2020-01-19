@@ -46,17 +46,13 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOiJ1c2VyIiwiaWF0IjoxNTc5MzcyMTYxLCJleHAiOjE1NzkzNzMwNjF9.OcQaWu1Hi31bkrmlPHGdWvFjEV0qh6VaW161hcmPuxU",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOiJ1c2VyIiwiaWF0IjoxNTc5NDQ4MjU1LCJleHAiOjE1Nzk0NDkxNTV9.HM9QyLSNKw1ZG_xLjfaaAQS45cnjM41ar36OBoFuovc",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "localhost:7777/restaurant-service/restaurants",
 							"host": [
@@ -72,14 +68,14 @@
 					"response": []
 				},
 				{
-					"name": "Restaurant",
+					"name": "Add Restaurant",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOiJ1c2VyIiwiaWF0IjoxNTc5MzcyMTYxLCJleHAiOjE1NzkzNzMwNjF9.OcQaWu1Hi31bkrmlPHGdWvFjEV0qh6VaW161hcmPuxU",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOiJ1c2VyIiwiaWF0IjoxNTc5NDM3ODUwLCJleHAiOjE1Nzk0Mzg3NTB9.vr4oGGNFDwx1a-Ouzva7UosX72LaXn0JnQv6lJCB4Rs",
 									"type": "string"
 								}
 							]
@@ -89,8 +85,8 @@
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"type": "text",
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -106,6 +102,131 @@
 							"path": [
 								"restaurant-service",
 								"restaurant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Restaurant Menu Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOiJ1c2VyIiwiaWF0IjoxNTc5NDQzODg3LCJleHAiOjE1Nzk0NDQ3ODd9.qLYy3XPgWQexIbLXxQhBxeIa-s_uBZK5VKpSRuHd6PY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"menuId\": \"3\",\n\t\"name\": \"McVeggie Burger\",\n\t\"description\": \"McVeggie Burger\",\n\t\"price\": 80.00\n}"
+						},
+						"url": {
+							"raw": "localhost:7777/restaurant-service/item",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"restaurant-service",
+								"item"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ORDER-SERVICE",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"user\",\n\t\"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:7777/order-service/login",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"order-service",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Place Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOiJ1c2VyIiwiaWF0IjoxNTc5NDQ4MjU1LCJleHAiOjE1Nzk0NDkxNTV9.HM9QyLSNKw1ZG_xLjfaaAQS45cnjM41ar36OBoFuovc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"customerId\": \"1111\",\n\t\"restaurantId\": \"3\",\n\t\"items\": [{\n\t\t\"itemId\": \"2\",\n\t\t\"quantity\": \"2\"\t\n\t}]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:7777/order-service/order",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"order-service",
+								"order"
 							]
 						}
 					},

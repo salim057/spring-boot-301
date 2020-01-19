@@ -135,7 +135,7 @@ public class RestaurantControllerTest {
 		requestDto.setRating(4.3);
 		when(restaurantService.saveRestaurant(any(RestaurantRequestDto.class))).thenReturn(new Restaurant());
 		RequestBuilder request = MockMvcRequestBuilders.post(
-				"/restaurant")
+				"/restaurants")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString((requestDto)))
 				.header(HttpHeaders.AUTHORIZATION,
@@ -569,7 +569,7 @@ public class RestaurantControllerTest {
 		
 		// request
 		RequestBuilder request = MockMvcRequestBuilders
-				.get("/restaurant/items/1?pagenumber=1&pagesize=10")
+				.get("/restaurants/items/1?pagenumber=1&pagesize=10")
 				.accept(MediaType.APPLICATION_JSON)
 				.header(HttpHeaders.AUTHORIZATION,
 						jwt);
@@ -587,7 +587,7 @@ public class RestaurantControllerTest {
 		
 		// request
 		RequestBuilder request = MockMvcRequestBuilders
-				.get("/restaurant/items/1?pagenumber=1&pagesize=10")
+				.get("/restaurants/items/1?pagenumber=1&pagesize=10")
 				.accept(MediaType.APPLICATION_JSON)
 				.header(HttpHeaders.AUTHORIZATION,
 						jwt);
@@ -607,7 +607,7 @@ public class RestaurantControllerTest {
 				.signWith(SignatureAlgorithm.HS256, "secretkey").setExpiration(new Date(System.currentTimeMillis() - EXPIRATIONTIME)).compact();
 		// request
 		RequestBuilder request = MockMvcRequestBuilders
-				.get("/restaurant/items/1?pagenumber=1&pagesize=10")
+				.get("/restaurants/items/1?pagenumber=1&pagesize=10")
 				.accept(MediaType.APPLICATION_JSON)
 				.header(HttpHeaders.AUTHORIZATION,
 						jwt);

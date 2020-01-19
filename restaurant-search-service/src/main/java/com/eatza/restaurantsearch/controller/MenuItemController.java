@@ -25,54 +25,41 @@ import com.eatza.restaurantsearch.service.menuitemservice.MenuItemService;
 @RestController
 public class MenuItemController {
 
-
 	@Autowired
 	MenuItemService menuItemService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(MenuItemController.class);
 
-	
-	@PostMapping("/item")
-	public ResponseEntity<String> addItemsToRestaurantMenu(@RequestHeader String authorization,@RequestBody ItemRequestDto itemRequestDto){
-
+	@PostMapping("/items")
+	public ResponseEntity<String> addItemsToRestaurantMenu(@RequestHeader String authorization,
+														   @RequestBody ItemRequestDto itemRequestDto){
 		logger.debug("In addItemsToRestaurantMenu method");
 		menuItemService.saveMenuItem(itemRequestDto);
 		logger.debug("Item added successfully");
-		return ResponseEntity
-				.status(HttpStatus.OK)
-				.body("Item Added successfully");
-
+		return ResponseEntity.status(HttpStatus.OK).body("Item Added successfully");
 	}
 
-	@GetMapping("/restaurant/item/name/{name}")
-	public ResponseEntity<List<Restaurant>> getRestaurantsContainingItem(@RequestHeader String authorization,@PathVariable String name, @RequestParam(defaultValue="1") int pagenumber,@RequestParam(defaultValue="10") int pagesize) throws  ItemNotFoundException{
+	@GetMapping("/restaurants/items/name/{name}")
+	public ResponseEntity<List<Restaurant>> getRestaurantsContainingItem(@RequestHeader String authorization,
+																		 @PathVariable String name, 
+																		 @RequestParam(defaultValue = "1") int pagenumber,
+																		 @RequestParam(defaultValue = "10") int pagesize) 
+																				 throws ItemNotFoundException {
 		logger.debug("In getRestaurantsContainingItem method, calling service");
-		return ResponseEntity
-				.status(HttpStatus.OK)
-				.body(menuItemService.findByName(name, pagenumber, pagesize));
-
+		return ResponseEntity.status(HttpStatus.OK).body(menuItemService.findByName(name, pagenumber, pagesize));
 	}
 
-	@GetMapping("/item/id/{id}")
-	public ResponseEntity<MenuItem> getItemById( @PathVariable Long id) throws ItemNotFoundException{
+	@GetMapping("/items/id/{id}")
+	public ResponseEntity<MenuItem> getItemById(@PathVariable Long id) throws ItemNotFoundException {
 		logger.debug("In getItemById method, calling service");
 		Optional<MenuItem> item = menuItemService.findById(id);
-		if(item.isPresent()) {
+		if (item.isPresent()) {
 			logger.debug("got the item");
-
-			return ResponseEntity
-					.status(HttpStatus.OK)
-					.body(item.get());
-		}
-		else {
+			return ResponseEntity.status(HttpStatus.OK).body(item.get());
+		} else {
 			logger.debug("Item not found");
 			throw new ItemNotFoundException("No Item found for specified inputs");
 		}
-		
-		
-
 	}
-	
-
-
 
 }

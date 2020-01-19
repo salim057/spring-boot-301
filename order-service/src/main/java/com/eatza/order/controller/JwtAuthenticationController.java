@@ -13,7 +13,6 @@ import com.eatza.order.dto.UserDto;
 import com.eatza.order.exception.UnauthorizedException;
 import com.eatza.order.service.authenticationservice.JwtAuthenticationService;
 
-
 @RestController
 public class JwtAuthenticationController {
 
@@ -21,18 +20,12 @@ public class JwtAuthenticationController {
 	@Autowired
 	JwtAuthenticationService authenticationService;
 
-
 	@PostMapping("/login")
-	public ResponseEntity<String> login(@RequestBody UserDto user) throws UnauthorizedException  {
-
+	public ResponseEntity<String> login(@RequestBody UserDto user) throws UnauthorizedException {
 		logger.debug("Calling authentication service to verify user");
 		String token = authenticationService.authenticateUser(user);
 		logger.debug("User verified, returning back token");
-		return ResponseEntity
-				.status(HttpStatus.OK)
-				.body(token);
-
-
+		return ResponseEntity.status(HttpStatus.OK).body(token);
 	}
-
+	
 }

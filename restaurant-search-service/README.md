@@ -72,7 +72,7 @@ This api requires path variable `restaurantid` to be passed along with authoriza
 This API also required pagenumber and pagesize as request params for pagination, if you pass pagenumber as 1 and pagesize as 10. it is going to show you 1st 10 results starting from 1st page.
 
 ```
-curl -X GET "http://localhost:8080/restaurant/items/<restaurantid>?pagenumber=<pagenumber>&pagesize=<pagesize>" -H "accept: */*" -H "authorization: <Bearer token>"
+curl -X GET "http://localhost:8080/restaurants/items/<restaurantid>?pagenumber=<pagenumber>&pagesize=<pagesize>" -H "accept: */*" -H "authorization: <Bearer token>"
 ```
 
 ### getAllRestaurants in restaurant-controller
@@ -147,5 +147,5 @@ curl -X GET "http://localhost:8080/restaurants/name/<restaurant name>/location/<
 This api requires path variable `id` to be passed along with authorization bearer token as header and it will return back menu-item with given ID if found in DB.
 
 ```
-curl -X GET "http://localhost:8080/item/id/<id>" -H "accept: */*" -H "authorization: <Bearer token>"
+curl -X GET "http://localhost:8080/items/id/<id>" -H "accept: */*" -H "authorization: <Bearer token>"
 ```

@@ -23,7 +23,7 @@ public class RestaurantsearchserviceApplication {
 	public FilterRegistrationBean<JwtFilter> jwtFilter() {
 		final FilterRegistrationBean<JwtFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new JwtFilter());
-		registrationBean.addUrlPatterns("/restaurant/*", "/restaurants/*","/item/");
+		registrationBean.addUrlPatterns("/restaurants/*","/items/");
 
 		return registrationBean;
 	}

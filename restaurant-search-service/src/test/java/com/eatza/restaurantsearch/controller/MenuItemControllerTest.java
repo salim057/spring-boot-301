@@ -69,7 +69,7 @@ public class MenuItemControllerTest {
 		
 		when(menuItemService.saveMenuItem(any(ItemRequestDto.class))).thenReturn(new MenuItem());
 		RequestBuilder request = MockMvcRequestBuilders.post(
-				"/item")
+				"/items")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString((requestDto)))
 				.header(HttpHeaders.AUTHORIZATION,
@@ -85,7 +85,7 @@ public class MenuItemControllerTest {
 		
 		when(menuItemService.findByName(any(String.class),anyInt(), anyInt())).thenReturn(new ArrayList<>());
 		RequestBuilder request = MockMvcRequestBuilders.get(
-				"/restaurant/item/name/rajma?pagenumber=1&pagesize=10")
+				"/restaurants/items/name/rajma?pagenumber=1&pagesize=10")
 				.accept(
 						MediaType.ALL)
 				.header(HttpHeaders.AUTHORIZATION,
@@ -103,7 +103,7 @@ public class MenuItemControllerTest {
 		Optional<MenuItem> returnedItem= Optional.of(menuItem);
 		when(menuItemService.findById(anyLong())).thenReturn(returnedItem);
 		RequestBuilder request = MockMvcRequestBuilders.get(
-				"/item/id/1?pagenumber=1&pagesize=10")
+				"/items/id/1?pagenumber=1&pagesize=10")
 				.accept(
 						MediaType.ALL)
 				.header(HttpHeaders.AUTHORIZATION,
@@ -118,7 +118,7 @@ public class MenuItemControllerTest {
 	public void getItemById_empty() throws Exception {
 		when(menuItemService.findById(anyLong())).thenReturn(Optional.empty());
 		RequestBuilder request = MockMvcRequestBuilders.get(
-				"/item/id/1?pagenumber=1&pagesize=10")
+				"/items/id/1?pagenumber=1&pagesize=10")
 				.accept(
 						MediaType.ALL)
 				.header(HttpHeaders.AUTHORIZATION,
