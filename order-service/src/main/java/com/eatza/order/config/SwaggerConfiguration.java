@@ -26,10 +26,9 @@ public class SwaggerConfiguration {
     }
 	
 	@Bean
-	public UiConfiguration uiConfig()
-	{
-	    return UiConfigurationBuilder.builder() //
-	             .displayRequestDuration( true ) //
+	public UiConfiguration uiConfig(){
+	    return UiConfigurationBuilder.builder()
+	             .displayRequestDuration(true)
 	             .build();
 	}
 
