@@ -10,10 +10,10 @@ import com.eatza.order.model.Order;
 
 public interface OrderService  {
 	
-	Order placeOrder(OrderRequestDto orderRequest) throws OrderException;
+	Order placeOrder(OrderRequestDto orderRequest, String authHeader) throws OrderException;
 	boolean cancelOrder(Long orderId);
 	Optional<Order> getOrderById(Long id);
 	double getOrderAmountByOrderId(Long id);
-	OrderUpdateResponseDto updateOrder(OrderUpdateDto orderUpdateRequest) throws OrderException;
+	OrderUpdateResponseDto updateOrder(OrderUpdateDto orderUpdateRequest, String authHeader) throws OrderException;
 
 }

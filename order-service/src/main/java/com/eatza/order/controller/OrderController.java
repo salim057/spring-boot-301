@@ -36,7 +36,7 @@ public class OrderController {
 											@RequestBody OrderRequestDto orderRequestDto) 
 													throws OrderException {
 		logger.debug("In place order method, calling the service");
-		Order order = orderService.placeOrder(orderRequestDto);
+		Order order = orderService.placeOrder(orderRequestDto, authorization);
 		logger.debug("Order Placed Successfully");
 		return ResponseEntity.status(HttpStatus.OK).body(order);
 	}
@@ -61,7 +61,7 @@ public class OrderController {
 															  @RequestBody OrderUpdateDto orderUpdateDto) 
 																	  throws OrderException {
 		logger.debug(" In updateOrder method, calling service");
-		OrderUpdateResponseDto updatedResponse = orderService.updateOrder(orderUpdateDto);
+		OrderUpdateResponseDto updatedResponse = orderService.updateOrder(orderUpdateDto, authorization);
 		logger.debug("Returning back the object");
 
 		return ResponseEntity.status(HttpStatus.OK).body(updatedResponse);

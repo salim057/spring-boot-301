@@ -91,7 +91,7 @@ public class OrderServiceTest {
 		when(restTemplate.getForObject(any(String.class),any(Class.class))).thenReturn(item);
 		when(itemService.saveItem(any(OrderedItem.class))).thenReturn(new OrderedItem());
 
-		Order order = orderService.placeOrder(orderRequest);
+		Order order = orderService.placeOrder(orderRequest, "");
 		assertNotNull(order);
 
 	}
@@ -118,7 +118,7 @@ public class OrderServiceTest {
 		when(restTemplate.getForObject(any(String.class),any(Class.class))).thenReturn(item);
 		//		when(itemService.saveItem(any(OrderedItem.class))).thenReturn(new OrderedItem());
 
-		Order order = orderService.placeOrder(orderRequest);
+		Order order = orderService.placeOrder(orderRequest, "");
 		assertNotNull(order);
 
 	}
@@ -144,7 +144,7 @@ public class OrderServiceTest {
 		when(restTemplate.getForObject(any(String.class),any(Class.class))).thenReturn(null);
 		//		when(itemService.saveItem(any(OrderedItem.class))).thenReturn(new OrderedItem());
 
-		Order order = orderService.placeOrder(orderRequest);
+		Order order = orderService.placeOrder(orderRequest, "");
 		assertNotNull(order);
 
 	}
@@ -170,7 +170,7 @@ public class OrderServiceTest {
 
 		when(restTemplate.getForObject(any(String.class),any(Class.class))).thenReturn(item);
 		//		when(itemService.saveItem(any(OrderedItem.class))).thenReturn(new OrderedItem());
-		Order order = orderService.placeOrder(orderRequest);
+		Order order = orderService.placeOrder(orderRequest, "");
 		assertNotNull(order);
 
 	}
@@ -244,7 +244,7 @@ public class OrderServiceTest {
 		dto.setOrderId(1L);
 		dto.setRestaurantId(1L);
 		dto.setStatus("UPDATED");
-		 orderService.updateOrder(new OrderUpdateDto(1L, 1L, Arrays.asList(new OrderedItemsDto(1L,2)), 1L));
+		 orderService.updateOrder(new OrderUpdateDto(1L, 1L, Arrays.asList(new OrderedItemsDto(1L,2)), 1L), "");
 		
 	}
 
@@ -259,7 +259,7 @@ public class OrderServiceTest {
 		ItemFetchDto item = new ItemFetchDto(1L, "Onion Dosa", "Dosa", 110, menu);
 
 		when(restTemplate.getForObject(any(String.class),any(Class.class))).thenReturn(item);
-		orderService.updateOrder(new OrderUpdateDto(1L, 1L, Arrays.asList(new OrderedItemsDto(1L, 0)), 1L));
+		orderService.updateOrder(new OrderUpdateDto(1L, 1L, Arrays.asList(new OrderedItemsDto(1L, 0)), 1L), "");
 
 	}
 
@@ -272,7 +272,7 @@ public class OrderServiceTest {
 		RestaurantFetchDto restaurant = new RestaurantFetchDto(1L, "Vasudev", "RR Nagar", "South Indian", 400, 4.2);
 		MenuFetchDto menu = new MenuFetchDto(1L, "10", "22", restaurant);
 		ItemFetchDto item = new ItemFetchDto(1L, "Onion Dosa", "Dosa", 110, menu);
-		orderService.updateOrder(new OrderUpdateDto(1L, 1L, Arrays.asList(new OrderedItemsDto(1L, 1)), 1L));
+		orderService.updateOrder(new OrderUpdateDto(1L, 1L, Arrays.asList(new OrderedItemsDto(1L, 1)), 1L), "");
 
 	}
 
@@ -287,7 +287,7 @@ public class OrderServiceTest {
 		ItemFetchDto item = new ItemFetchDto(1L, "Onion Dosa", "Dosa", 110, menu);
 
 		when(restTemplate.getForObject(any(String.class),any(Class.class))).thenReturn(item);
-		orderService.updateOrder(new OrderUpdateDto(1L, 1L, Arrays.asList(new OrderedItemsDto(1L, 1)), 1L));
+		orderService.updateOrder(new OrderUpdateDto(1L, 1L, Arrays.asList(new OrderedItemsDto(1L, 1)), 1L), "");
 
 	}
 
@@ -307,7 +307,7 @@ public class OrderServiceTest {
 		when( itemService.saveItem(any(OrderedItem.class))).thenReturn(new OrderedItem("Onion Dosa", 1, 110, orderReturned, 1L));
 		when(orderRepository.save(any(Order.class))).thenReturn(orderReturned);
 	
-		OrderUpdateResponseDto response = orderService.updateOrder(new OrderUpdateDto(1L,1L,Arrays.asList(new OrderedItemsDto(1L, 1)),1L));
+		OrderUpdateResponseDto response = orderService.updateOrder(new OrderUpdateDto(1L,1L,Arrays.asList(new OrderedItemsDto(1L, 1)),1L), "");
 		assertEquals("UPDATED", response.getStatus());
 	}
 	
@@ -321,7 +321,7 @@ public class OrderServiceTest {
 
 		RestaurantFetchDto restaurant = new RestaurantFetchDto(1L, "Vasudev", "RR Nagar", "South Indian", 400, 4.2);
 		MenuFetchDto menu = new MenuFetchDto(1L, "10", "22", restaurant);
-		OrderUpdateResponseDto response = orderService.updateOrder(new OrderUpdateDto(1L,1L,Arrays.asList(new OrderedItemsDto(1L, 1)),1L));
+		OrderUpdateResponseDto response = orderService.updateOrder(new OrderUpdateDto(1L,1L,Arrays.asList(new OrderedItemsDto(1L, 1)),1L), "");
 		assertEquals("UPDATED", response.getStatus());
 	}
 	
@@ -336,6 +336,6 @@ public class OrderServiceTest {
 		ItemFetchDto item = new ItemFetchDto(1L, "Onion Dosa", "Dosa", 110, menu);
 
 //		when(restTemplate.getForObject(any(String.class),any(Class.class))).thenReturn(item);
-		orderService.updateOrder(new OrderUpdateDto(1L, 2L, Arrays.asList(new OrderedItemsDto(1L, 1)), 1L));
+		orderService.updateOrder(new OrderUpdateDto(1L, 2L, Arrays.asList(new OrderedItemsDto(1L, 1)), 1L), "");
 	}
 }
