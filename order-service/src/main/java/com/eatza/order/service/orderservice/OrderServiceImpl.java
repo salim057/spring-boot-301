@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 
@@ -18,6 +19,7 @@ import com.eatza.order.dto.OrderUpdateResponseDto;
 import com.eatza.order.dto.OrderedItemsDto;
 import com.eatza.order.exception.ItemNotFoundException;
 import com.eatza.order.exception.OrderException;
+import com.eatza.order.kafka.Sender;
 import com.eatza.order.model.Order;
 import com.eatza.order.model.OrderedItem;
 import com.eatza.order.repository.OrderRepository;
@@ -26,6 +28,12 @@ import com.eatza.order.service.itemservice.ItemService;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+	
+	@Value("${spring.kafka.topic.orderPlaced}")
+	private String ORDER_PLACED_TOPIC;
+	
+	@Autowired
+	private Sender sender;
 
 	@Autowired
 	OrderRepository orderRepository;
@@ -33,19 +41,13 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	ItemService itemService;
 
-//	@Value("${restaurant.search.item.url}")
-//	private String restaurantServiceItemUrl;
-
-//	@Autowired
-//	RestTemplate restTemplate;
-	
 	@Autowired
 	RestaurantServiceProxy restaurantServiceProxy;
 
 	private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
 	@Override
-	public Order placeOrder(OrderRequestDto orderRequest) throws OrderException {
+	public Order placeOrder(OrderRequestDto orderRequest, String authHeader) throws OrderException {
 		logger.debug("In place order method, creating order object to persist");
 		Order order = new Order(orderRequest.getCustomerId(), "CREATED", orderRequest.getRestaurantId());
 		logger.debug("saving order in db");
@@ -58,7 +60,7 @@ public class OrderServiceImpl implements OrderService {
 				
 				ItemFetchDto item;
 				try {
-					item = restaurantServiceProxy.getItemById(itemDto.getItemId()).getBody();
+					item = restaurantServiceProxy.getItemById(itemDto.getItemId(), authHeader).getBody();
 				} catch (ItemNotFoundException e) {
 					item = null;
 				}
@@ -79,6 +81,7 @@ public class OrderServiceImpl implements OrderService {
 				OrderedItem itemToPersist = new OrderedItem(item.getName(), itemDto.getQuantity(), item.getPrice(),
 						savedOrder, item.getId());
 				itemService.saveItem(itemToPersist);
+				sender.send(ORDER_PLACED_TOPIC, savedOrder);
 			} catch (ResourceAccessException e) {
 				throw new OrderException(
 						"Something went wrong, looks " + "like restaurant is currently not accepting orders");
@@ -125,7 +128,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public OrderUpdateResponseDto updateOrder(OrderUpdateDto orderUpdateRequest) throws OrderException {
+	public OrderUpdateResponseDto updateOrder(OrderUpdateDto orderUpdateRequest, String authHeader) throws OrderException {
 
 		Order order = new Order(orderUpdateRequest.getCustomerId(), "UPDATED", orderUpdateRequest.getRestaurantId());
 		Optional<Order> previouslyPersistedOrder = orderRepository.findById(orderUpdateRequest.getOrderId());
@@ -148,7 +151,7 @@ public class OrderServiceImpl implements OrderService {
 			try {
 				ItemFetchDto item;
 				try {
-					item = restaurantServiceProxy.getItemById(itemDto.getItemId()).getBody();
+					item = restaurantServiceProxy.getItemById(itemDto.getItemId(), authHeader).getBody();
 				} catch (ItemNotFoundException e) {
 					item = null;
 				}

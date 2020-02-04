@@ -9,36 +9,6 @@
 			"name": "RESTAURANT-SEARCH-SERVICE",
 			"item": [
 				{
-					"name": "Login",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"username\": \"user\",\n\t\"password\": \"password\"\n}"
-						},
-						"url": {
-							"raw": "localhost:7777/restaurant-service/login",
-							"host": [
-								"localhost"
-							],
-							"port": "7777",
-							"path": [
-								"restaurant-service",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Restaurants",
 					"request": {
 						"auth": {
@@ -46,7 +16,7 @@
 							"oauth2": [
 								{
 									"key": "accessToken",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsibXMvYWRtaW4iLCJtcy91c2VyIiwibXcvYWRtaW5hcHAiXSwidXNlcl9uYW1lIjoiYWRtaW4iLCJzY29wZSI6WyJyb2xlX2FkbWluIl0sImV4cCI6MTU4MDI1ODMzNCwiYXV0aG9yaXRpZXMiOlsicm9sZV9hZG1pbiIsImNhbl91cGRhdGVfdXNlciIsImNhbl9yZWFkX3VzZXIiLCJjYW5fY3JlYXRlX3VzZXIiLCJjYW5fZGVsZXRlX3VzZXIiXSwianRpIjoiYjc0ZTE5MTgtZGM5My00YWM3LTg2NGUtYjY5YzI2YjIyNGI0IiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsImNsaWVudF9pZCI6ImFkbWluYXBwIn0.7BEdOXZ_X6TCrYBPvn1CsmklrMDMI3LLQU5PRMx8OpI",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzdGF1cmFudC1zZXJ2aWNlIiwiZ2F0ZXdheS1zZXJ2aWNlIiwib3JkZXItc2VydmljZSJdLCJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbInJvbGVfYWRtaW4iXSwiZXhwIjoxNTgwODQ3ODI4LCJhdXRob3JpdGllcyI6WyJyb2xlX2FkbWluIiwiY2FuX3VwZGF0ZV91c2VyIiwiY2FuX3JlYWRfdXNlciIsImNhbl9jcmVhdGVfdXNlciIsImNhbl9kZWxldGVfdXNlciJdLCJqdGkiOiI0NGM2OWU4OC0wNTI5LTQxMjEtOTdkZi00ODI1MjRmZDYxYWMiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiY2xpZW50X2lkIjoiYWRtaW5hcHAifQ._YlS1MOhzWffLjaXeSeLy4wwYM4pA-D8qv1_gHjMogo",
 									"type": "string"
 								},
 								{
@@ -141,7 +111,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"menuId\": \"3\",\n\t\"name\": \"McVeggie Burger\",\n\t\"description\": \"McVeggie Burger\",\n\t\"price\": 80.00\n}"
+							"raw": "{\n\t\"menuId\": \"3\",\n\t\"name\": \"Burger\",\n\t\"description\": \"Burger\",\n\t\"price\": 80.00\n}"
 						},
 						"url": {
 							"raw": "localhost:7777/restaurant-service/item",
@@ -163,49 +133,24 @@
 			"name": "ORDER-SERVICE",
 			"item": [
 				{
-					"name": "Login",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"username\": \"user\",\n\t\"password\": \"password\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:7777/order-service/login",
-							"host": [
-								"localhost"
-							],
-							"port": "7777",
-							"path": [
-								"order-service",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Place Order",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
+							"type": "oauth2",
+							"oauth2": [
 								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOiJ1c2VyIiwiaWF0IjoxNTc5NDQ4MjU1LCJleHAiOjE1Nzk0NDkxNTV9.HM9QyLSNKw1ZG_xLjfaaAQS45cnjM41ar36OBoFuovc",
+									"key": "accessToken",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzdGF1cmFudC1zZXJ2aWNlIiwiZ2F0ZXdheS1zZXJ2aWNlIiwib3JkZXItc2VydmljZSJdLCJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbInJvbGVfYWRtaW4iXSwiZXhwIjoxNTgwODUyNDczLCJhdXRob3JpdGllcyI6WyJyb2xlX2FkbWluIiwiY2FuX3VwZGF0ZV91c2VyIiwiY2FuX3JlYWRfdXNlciIsImNhbl9jcmVhdGVfdXNlciIsImNhbl9kZWxldGVfdXNlciJdLCJqdGkiOiI1OGI0ZmY5Ny00NWJlLTQyZGUtYTE5Ni1mNjUxZTk2ZDZlMTMiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiY2xpZW50X2lkIjoiYWRtaW5hcHAifQ.zLhW8qSG0NMFlR83XIHLP92akM8mNViMwJKehxc9aio",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
 									"type": "string"
 								}
 							]
@@ -221,7 +166,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"customerId\": \"1111\",\n\t\"restaurantId\": \"3\",\n\t\"items\": [{\n\t\t\"itemId\": \"2\",\n\t\t\"quantity\": \"2\"\t\n\t}]\n}",
+							"raw": "{\n\t\"customerId\": \"1111\",\n\t\"restaurantId\": \"3\",\n\t\"items\": [{\n\t\t\"itemId\": \"2\",\n\t\t\"quantity\": \"1\"\t\n\t}]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
