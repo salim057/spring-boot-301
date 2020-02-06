@@ -1,6 +1,6 @@
 package com.eatza.order.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,9 +30,9 @@ public class Order {
 	private Long restaurantId;
 
 	@CreationTimestamp
-	private LocalDateTime createDateTime;
+	private Date createdAt;
 	@UpdateTimestamp
-	private LocalDateTime updateDateTime;
+	private Date updatedAt;
 
 	public Order(Long customerId, String status, Long restaurantId) {
 		this.customerId = customerId;
