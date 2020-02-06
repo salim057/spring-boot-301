@@ -29,7 +29,7 @@ import com.eatza.order.service.itemservice.ItemService;
 @Service
 public class OrderServiceImpl implements OrderService {
 	
-	@Value("${spring.kafka.topic.orderPlaced}")
+	@Value("${spring.kafka.topic.order-placed}")
 	private String ORDER_PLACED_TOPIC;
 	
 	@Autowired
@@ -78,10 +78,13 @@ public class OrderServiceImpl implements OrderService {
 					orderRepository.delete(order);
 					throw new OrderException("Quantity of item cannot be 0");
 				}
-				OrderedItem itemToPersist = new OrderedItem(item.getName(), itemDto.getQuantity(), item.getPrice(),
-						savedOrder, item.getId());
-				itemService.saveItem(itemToPersist);
-				sender.send(ORDER_PLACED_TOPIC, savedOrder);
+				OrderedItem itemToPersist = new OrderedItem(item.getName(), 
+															itemDto.getQuantity(), 
+															item.getPrice(),
+															savedOrder, 
+															item.getId());
+				OrderedItem orderedItem = itemService.saveItem(itemToPersist);
+				sender.send(ORDER_PLACED_TOPIC, orderedItem.getOrder());
 			} catch (ResourceAccessException e) {
 				throw new OrderException(
 						"Something went wrong, looks " + "like restaurant is currently not accepting orders");
@@ -144,7 +147,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 		List<OrderedItem> previouslyOrderedItems = itemService.findbyOrderId(previouslyPersistedOrder.get().getId());
 		order.setId(previouslyPersistedOrder.get().getId());
-		order.setCreateDateTime(previouslyPersistedOrder.get().getCreateDateTime());
+		order.setCreatedAt(previouslyPersistedOrder.get().getCreatedAt());
 		List<OrderedItemsDto> itemsDtoList = orderUpdateRequest.getItems();
 		List<OrderedItem> updateItemsListToReturn = new ArrayList<>();
 		for (OrderedItemsDto itemDto : itemsDtoList) {
